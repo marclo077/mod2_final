@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.proyectofinalv1.io.ApiService
 import com.example.proyectofinalv1.model.Piece
 import retrofit2.Call
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        cargarDatos()
     }
 
     private fun cargarDatos(){
@@ -30,7 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         respuesta.enqueue(object: Callback<ArrayList<Piece>> {
             override fun onFailure(call: Call<ArrayList<Piece>>, t: Throwable) {
-                TODO("Not yet implemented")
                 Toast.makeText(this@MainActivity, getString(R.string.error_carga_datos), Toast.LENGTH_SHORT).show()
             }
 
@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
                 call: Call<ArrayList<Piece>>,
                 response: Response<ArrayList<Piece>>
             ) {
-                TODO("Not yet implemented")
                 if(response.isSuccessful) {
                     showData(response.body()!!)
                 }
@@ -51,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showData(pieces: List<Piece>){
         recyclerView.apply {
-            RecyclerView.LayoutManager = LinearLayoutManager(this@MainActivity)
+            layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = PieceAdapter(pieces)
         }
     }
