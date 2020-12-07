@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ProyectoFinalV1</string>
+    <string name="error_carga_datos">Ocurrio un problema al cargar los datos</string>
+</resources>
